@@ -4,28 +4,27 @@ import Feed from "./components/feed/Feed";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import Login from "./components/login/Login";
-import AuthState, { useAuth } from "./context/AuthState";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const currentUser = useAuth();
+  const { currentUser } = useAuth();
+  console.log(currentUser);
   return (
-    <AuthState>
-      <div className="app">
-        {/* Header */}
-        <Header />
-        {/* App body */}
+    <div className="app">
+      {/* Header */}
+      <Header />
+      {/* App body */}
 
-        {!currentUser ? (
-          <Login />
-        ) : (
-          <div className="app__body">
-            <Sidebar />
-            <Feed />
-            {/* Widgets */}
-          </div>
-        )}
-      </div>
-    </AuthState>
+      {currentUser ? (
+        <div className="app__body">
+          <Sidebar />
+          <Feed />
+          {/* Widgets */}
+        </div>
+      ) : (
+        <Login />
+      )}
+    </div>
   );
 }
 

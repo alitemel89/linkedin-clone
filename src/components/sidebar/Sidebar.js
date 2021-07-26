@@ -1,8 +1,11 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
+import { useAuth } from "../../context/AuthContext";
 import "./Sidebar.css";
 
 function Sidebar() {
+  
+  const { email } = useAuth();
 
   const recentItem = (topic) => (
       <div className="sidebar__recentItem">
@@ -18,8 +21,8 @@ function Sidebar() {
           alt=""
         />
         <Avatar />
-        <h2>Ali Temel</h2>
-        <h4>alitemel@gmail.com</h4>
+        <h2>Aylin Temel</h2>
+        <h4>{email}</h4>
       </div>
       <div className="sidebar__stats">
         <div className="sidebar__stat">

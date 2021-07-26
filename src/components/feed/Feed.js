@@ -7,10 +7,13 @@ import { CalendarViewDay, EventNote, Subscriptions } from "@material-ui/icons";
 import Post from "../post/Post";
 import { db } from "../../firebase";
 import firebase from "firebase";
+import { useAuth } from "../../context/AuthContext";
 
 function Feed() {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
+
+  const { email } = useAuth();
 
   useEffect(() => {
     db.collection("posts")
@@ -29,8 +32,8 @@ function Feed() {
     e.preventDefault();
 
     db.collection("posts").add({
-      name: "Ali Temel",
-      description: "Thisis a atest",
+      name: "Aylin Temel",
+      description: email,
       message: input,
       photoUrl: "",
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),

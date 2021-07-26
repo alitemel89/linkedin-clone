@@ -1,11 +1,69 @@
-import React from 'react'
+import React, { useRef } from "react";
+import { useAuth } from "../../context/AuthContext";
+
+import "./Login.css";
 
 function Login() {
-    return (
-        <div className="login">
-            <h1>You are not logged in</h1>
-        </div>
-    )
+  const { signup, login } = useAuth();
+  const fullNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  async function registerToApp(e) {
+    e.preventDefault();
+
+    try {
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function loginToApp(e) {
+    e.preventDefault();
+
+    try {
+      await login(emailRef.current.value, passwordRef.current.value);
+    } catch (error) {
+      console.log(error.message);
+      alert("Failed to sign in");
+    }
+  }
+
+  return (
+    <div className="login">
+      <img
+        src="https://uctlanguagecentre.com/wp-content/uploads/2016/10/linkedin_1.jpg"
+        alt="company-logo"
+      />
+
+      <form>
+        <input
+          type="text"
+          placeholder="Full name required if registering"
+          ref={fullNameRef}
+        />
+        <input type="text" placeholder="Profile pic URL optional" />
+        <input type="email" placeholder="Email" required ref={emailRef} />
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          ref={passwordRef}
+        />
+        <button type="submit" onClick={loginToApp}>
+          Sign In
+        </button>
+      </form>
+
+      <p>
+        Not a member?&nbsp;
+        <span className="login__register" onClick={registerToApp}>
+          Register Now
+        </span>
+      </p>
+    </div>
+  );
 }
 
 export default Login;
