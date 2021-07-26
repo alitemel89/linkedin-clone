@@ -33,7 +33,7 @@ function Login() {
   return (
     <div className="login">
       <img
-        src="https://uctlanguagecentre.com/wp-content/uploads/2016/10/linkedin_1.jpg"
+        src="https://www.freepnglogos.com/uploads/linkedin-logo-transparent-png-16.png"
         alt="company-logo"
       />
 
